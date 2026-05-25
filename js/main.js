@@ -59,12 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
     easing: 'ease-out-cubic',
   });
 
-  // Lightbox (sau khi gallery đã render)
+  // Lightbox (sau khi gallery đã render) - fullscreen mode
   const lightbox = GLightbox({
     selector: '.glightbox',
     touchNavigation: true,
     loop: true,
     zoomable: true,
+    draggable: true,
+    openEffect: 'zoom',
+    closeEffect: 'fade',
+    width: '100vw',
+    height: '100vh',
   });
 });
 
