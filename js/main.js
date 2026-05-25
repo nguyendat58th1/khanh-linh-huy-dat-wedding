@@ -59,18 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
     easing: 'ease-out-cubic',
   });
 
-  // Lightbox - hien thi anh dung do phan giai goc
+  // Lightbox - hien thi anh vua man hinh, giu ty le
   const lightbox = GLightbox({
     selector: '.glightbox',
     touchNavigation: true,
     loop: true,
     zoomable: true,
-    draggable: true,
-    openEffect: 'zoom',
+    draggable: false,
+    openEffect: 'fade',
     closeEffect: 'fade',
-    // Khong gioi han kich thuoc - hien thi dung do phan giai anh
-    width: 'auto',
-    height: 'auto',
   });
 });
 
