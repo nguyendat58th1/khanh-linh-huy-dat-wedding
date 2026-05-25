@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    Wedding Gallery - Custom styles
    ============================================ */
 
@@ -11,11 +11,11 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Lexend', 'Segoe UI', Tahoma, Arial, sans-serif;
 }
 
-.font-script { font-family: 'Dancing Script', cursive; font-weight: 600; }
-.font-serif  { font-family: 'Playfair Display', serif; }
+.font-script { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; font-weight: 300; font-style: italic; font-size: 1.1em; }
+.font-serif  { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
 
 /* ---------- HERO ---------- */
 .hero {
