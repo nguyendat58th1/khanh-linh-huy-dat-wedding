@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     easing: 'ease-out-cubic',
   });
 
-  // Lightbox (sau khi gallery đã render) - fullscreen mode
+  // Lightbox - hien thi anh dung do phan giai goc
   const lightbox = GLightbox({
     selector: '.glightbox',
     touchNavigation: true,
@@ -68,8 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
     draggable: true,
     openEffect: 'zoom',
     closeEffect: 'fade',
-    width: '100vw',
-    height: '100vh',
+    // Khong gioi han kich thuoc - hien thi dung do phan giai anh
+    width: 'auto',
+    height: 'auto',
   });
 });
 
