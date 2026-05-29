@@ -18,15 +18,11 @@ async function autoDetectImages() {
     }
   } catch (_) { /* ignore */ }
 
-  // 2) Probe common patterns
-  const exts = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG'];
+  // 2) Probe common patterns (gi\u1edbi h\u1ea1n nh\u1eb9 \u0111\u1ec3 kh\u00f4ng ch\u1eadm)
+  const exts = ['jpg', 'jpeg', 'png', 'webp'];
   const patterns = [
     i => `${i}`,
     i => `${String(i).padStart(2, '0')}`,
-    i => `wedding-${String(i).padStart(2, '0')}`,
-    i => `anh-cuoi-${String(i).padStart(2, '0')}`,
-    i => `img-${i}`,
-    i => `IMG_${String(i).padStart(4, '0')}`,
   ];
   const tryLoad = (path) => new Promise(resolve => {
     const img = new Image();
@@ -37,14 +33,14 @@ async function autoDetectImages() {
   const found = [];
   for (const makeName of patterns) {
     let missStreak = 0;
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 50; i++) {
       let hit = null;
       for (const ext of exts) {
         const name = `${makeName(i)}.${ext}`;
         if (await tryLoad(`assets/images/${name}`)) { hit = name; break; }
       }
       if (hit) { found.push(hit); missStreak = 0; }
-      else { missStreak++; if (missStreak >= 3) break; }
+      else { missStreak++; if (missStreak >= 2) break; }
     }
     if (found.length) return found;
   }
@@ -272,11 +268,39 @@ function startCountdown() {
   tick(); setInterval(tick, 1000);
 }
 
-// ---- Loader hide ----
+// ---- Loader hide (nhanh + an toàn) ----
+// Ẩn loader theo điều kiện nào đến trước:
+//   - Ảnh hero đầu tiên tải xong
+//   - Window 'load' event
+//   - Timeout an toàn 2.5s (không bao giờ kẹt ở loader)
 function hideLoader() {
-  window.addEventListener('load', () => {
-    setTimeout(() => document.getElementById('loader')?.classList.add('hidden'), 600);
-  });
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+  let hidden = false;
+  const hide = () => {
+    if (hidden) return;
+    hidden = true;
+    loader.classList.add('hidden');
+    setTimeout(() => loader.remove(), 800);
+  };
+
+  // 1) Khi ảnh hero đầu tiên load xong
+  const firstHero = document.querySelector('.hero-bg');
+  if (firstHero) {
+    const bg = getComputedStyle(firstHero).backgroundImage.match(/url\("?(.+?)"?\)/);
+    if (bg && bg[1]) {
+      const img = new Image();
+      img.onload = () => setTimeout(hide, 200);
+      img.onerror = hide;
+      img.src = bg[1];
+    }
+  }
+
+  // 2) Window load (mọi tài nguyên xong)
+  window.addEventListener('load', () => setTimeout(hide, 100));
+
+  // 3) Safety timeout — không bao giờ đợi quá 2.5s
+  setTimeout(hide, 2500);
 }
 
 // ---- Init ----
