@@ -153,8 +153,8 @@ function initHeroSwiper() {
     loop: true,
     effect: 'fade',
     fadeEffect: { crossFade: true },
-    speed: 1500,
-    autoplay: { delay: 5000, disableOnInteraction: false },
+    speed: 700,
+    autoplay: { delay: 1500, disableOnInteraction: false },
     allowTouchMove: false,
   });
 }
@@ -264,15 +264,32 @@ function setupMusic() {
     if (src) { src.src = `assets/music/${CONFIG.backgroundMusic}`; audio.load(); }
   }
   let playing = false;
+  let fadeFrame;
+  const fadeInMusic = () => {
+    cancelAnimationFrame(fadeFrame);
+    const start = performance.now();
+    const startVolume = 0.08;
+    const targetVolume = 1;
+    const duration = 5000;
+    audio.volume = startVolume;
+    const step = now => {
+      const progress = Math.min((now - start) / duration, 1);
+      audio.volume = startVolume + (targetVolume - startVolume) * progress;
+      if (progress < 1 && playing) fadeFrame = requestAnimationFrame(step);
+    };
+    fadeFrame = requestAnimationFrame(step);
+  };
   playBackgroundMusic = () => {
     audio.play().then(() => {
       playing = true;
       toggle.classList.add('playing');
+      fadeInMusic();
     }).catch(() => {});
   };
   toggle.addEventListener('click', () => {
     if (playing) {
       audio.pause();
+      cancelAnimationFrame(fadeFrame);
       toggle.classList.remove('playing');
       playing = false;
     } else {
