@@ -50,7 +50,7 @@ body {
   position: absolute; inset: 22px 38px 0; z-index: 1;
   background: #fffdf9; border: 1px solid rgba(201,169,110,.65);
   box-shadow: 0 8px 18px rgba(79,13,32,.12);
-  transform: translateY(58px); transition: transform .9s cubic-bezier(.2,.75,.25,1);
+  transform: translateY(0); transition: transform .9s cubic-bezier(.2,.75,.25,1);
 }
 .invitation-flap {
   position: absolute; inset: 0 0 auto; z-index: 4; height: 122px;
@@ -79,7 +79,11 @@ body {
   transition: opacity .45s ease .35s;
 }
 .invitation-gate.is-opening .invitation-flap { transform: rotateX(180deg); }
-.invitation-gate.is-opening .invitation-paper { transform: translateY(0); }
+.invitation-gate.is-opening .invitation-paper { transform: translateY(-14px); }
+.invitation-gate.is-opening .invitation-card-inner { overflow: visible; }
+.invitation-gate.is-opening .invitation-paper {
+  z-index: 5; background: transparent; border-color: transparent; box-shadow: none;
+}
 .invitation-gate.is-opening .invitation-photo { opacity: 1; transform: translateY(-70px) rotate(-10deg); transition-delay: .5s; }
 .invitation-gate.is-opening .invitation-photo-right { transform: translateY(-70px) rotate(10deg); }
 .invitation-gate.is-opening .invitation-paper-date { opacity: 1; }
