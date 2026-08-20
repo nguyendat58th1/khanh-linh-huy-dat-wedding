@@ -60,7 +60,7 @@ async function renderGallery() {
     const isObject = typeof img === 'object';
     const thumbSrc = isObject ? img.src  : `assets/images/thumbs/${img}`;
     const previewSrc = isObject ? img.src : `assets/images/display/${img}`;
-    const fullSrc  = isObject ? img.full : `assets/images/${img}`;
+    const fullSrc  = previewSrc;
     const a = document.createElement('a');
     a.href = previewSrc;
     a.className = 'masonry-item';
@@ -84,6 +84,8 @@ function initLightGallery() {
     if (!item?.dataset.fullSrc) return Promise.resolve();
     if (warmedImages.has(item.dataset.fullSrc)) return warmedImages.get(item.dataset.fullSrc);
     const image = new Image();
+    image.fetchPriority = 'high';
+    image.decoding = 'async';
     const promise = new Promise(resolve => {
       image.onload = resolve;
       image.onerror = resolve;
@@ -104,7 +106,11 @@ function initLightGallery() {
   el.addEventListener('pointerover', event => warmFullImage(event.target.closest('.masonry-item')));
   el.addEventListener('pointerdown', event => warmFullImage(event.target.closest('.masonry-item')));
   el.addEventListener('lgAfterOpen', event => upgradeSlide(event.detail.index));
-  el.addEventListener('lgAfterSlide', event => upgradeSlide(event.detail.index));
+  el.addEventListener('lgAfterSlide', event => {
+    upgradeSlide(event.detail.index);
+    const nextIndex = (event.detail.index + 1) % galleryItems().length;
+    warmFullImage(galleryItems()[nextIndex]);
+  });
   lightGallery(el, {
     selector: '.masonry-item',
     plugins: [window.lgZoom, window.lgThumbnail, window.lgFullscreen, window.lgAutoplay].filter(Boolean),
