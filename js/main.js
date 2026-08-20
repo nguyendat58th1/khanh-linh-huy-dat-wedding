@@ -58,7 +58,7 @@ async function renderGallery() {
   container.innerHTML = '';
   images.forEach((img, idx) => {
     const isObject = typeof img === 'object';
-    const thumbSrc = isObject ? img.src  : `assets/images/${img}`;
+    const thumbSrc = isObject ? img.src  : `assets/images/thumbs/${img}`;
     const fullSrc  = isObject ? img.full : `assets/images/${img}`;
     const a = document.createElement('a');
     a.href = fullSrc;
@@ -88,6 +88,7 @@ function initLightGallery() {
 
 // ---- Lenis smooth scroll ----
 let lenis;
+let playBackgroundMusic = () => {};
 function initLenis() {
   if (!window.Lenis) return;
   lenis = new Lenis({ duration: 0.8, smoothWheel: true, syncTouch: false, easing: t => 1 - Math.pow(1 - t, 3) });
@@ -228,10 +229,20 @@ function setupMusic() {
     if (src) { src.src = `assets/music/${CONFIG.backgroundMusic}`; audio.load(); }
   }
   let playing = false;
+  playBackgroundMusic = () => {
+    audio.play().then(() => {
+      playing = true;
+      toggle.classList.add('playing');
+    }).catch(() => {});
+  };
   toggle.addEventListener('click', () => {
-    if (playing) { audio.pause(); toggle.classList.remove('playing'); }
-    else { audio.play().catch(() => {}); toggle.classList.add('playing'); }
-    playing = !playing;
+    if (playing) {
+      audio.pause();
+      toggle.classList.remove('playing');
+      playing = false;
+    } else {
+      playBackgroundMusic();
+    }
   });
 }
 
@@ -252,6 +263,7 @@ function setupInvitationGate() {
   window.addEventListener('touchmove', preventScroll, { passive: false });
   window.addEventListener('keydown', preventKeyScroll);
   openButton.addEventListener('click', () => {
+    playBackgroundMusic();
     gate.classList.add('is-opening');
     openButton.disabled = true;
     setTimeout(() => {
