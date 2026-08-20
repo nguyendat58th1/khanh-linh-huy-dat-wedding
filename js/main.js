@@ -301,15 +301,13 @@ function setupInvitationGate() {
     playBackgroundMusic();
     gate.classList.add('is-opening');
     openButton.disabled = true;
-    setTimeout(() => {
-      gate.classList.add('is-open');
-      document.body.classList.remove('invitation-locked');
-      document.documentElement.classList.remove('invitation-locked');
-      window.removeEventListener('wheel', preventScroll);
-      window.removeEventListener('touchmove', preventScroll);
-      window.removeEventListener('keydown', preventKeyScroll);
-      setTimeout(() => gate.remove(), 850);
-    }, 4400);
+    gate.classList.add('is-open');
+    document.body.classList.remove('invitation-locked');
+    document.documentElement.classList.remove('invitation-locked');
+    window.removeEventListener('wheel', preventScroll);
+    window.removeEventListener('touchmove', preventScroll);
+    window.removeEventListener('keydown', preventKeyScroll);
+    setTimeout(() => gate.remove(), 850);
   }, { once: true });
 }
 

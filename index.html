@@ -38,25 +38,16 @@
   <div id="invitationGate" class="invitation-gate" role="dialog" aria-modal="true" aria-labelledby="invitationTitle">
     <div class="invitation-card">
       <div class="invitation-card-inner">
-        <div class="invitation-envelope" aria-hidden="true">
-          <div class="invitation-flap"></div>
-          <div class="invitation-paper">
-            <div class="invitation-photo invitation-photo-left">
-              <img src="assets/images/display/TTD_7466.jpg" alt="" />
-            </div>
-            <div class="invitation-paper-date">18 · 10 · 2026</div>
-            <div class="invitation-photo invitation-photo-right">
-              <img src="assets/images/display/TTD_7480.jpg" alt="" />
-            </div>
+        <div class="cover-header">
+          <div>
+            <p class="cover-kicker">Save The Date</p>
+            <p class="cover-date">18 · 10 · 2026</p>
           </div>
+          <div class="double-happiness" aria-label="Song hỷ">囍</div>
         </div>
-        <p class="invitation-kicker">Thiệp mời</p>
-        <p class="invitation-monogram">Đ <span>&amp;</span> L</p>
-        <h1 id="invitationTitle" class="invitation-title">Huy Đạt &amp; Khánh Linh</h1>
-        <p class="invitation-date">18 · 10 · 2026</p>
-        <button id="openInvitation" class="invitation-open" type="button">
-          <i class="fa-solid fa-envelope-open" aria-hidden="true"></i>
-          <span>Mở thiệp cưới</span>
+        <h1 id="invitationTitle" class="cover-title">Huy Đạt <span>&amp;</span> Khánh Linh</h1>
+        <button id="openInvitation" class="cover-photo-trigger" type="button" aria-label="Mở thiệp cưới">
+          <img src="assets/images/display/TTD_7458.jpg" alt="Huy Đạt và Khánh Linh" />
         </button>
       </div>
     </div>
@@ -79,48 +70,20 @@
     <source src="assets/music/wedding.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- HERO with Swiper background slider -->
-  <section class="hero relative h-screen overflow-hidden">
-    <div class="swiper hero-swiper absolute inset-0">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/display/TTD_6724.jpg')"></div></div>
-        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/display/TTD_7273.jpg')"></div></div>
-        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/display/TTD_7298.jpg')"></div></div>
-        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/display/TTD_7382.jpg')"></div></div>
-      </div>
-    </div>
-    <div class="hero-overlay absolute inset-0"></div>
-
-    <div class="relative z-10 h-full flex items-center justify-center text-center text-white px-6">
-      <div>
-        <p class="hero-pre tracking-[0.7em] uppercase text-xs md:text-sm mb-8 opacity-90" data-splitting>Save the date</p>
-        <h1 class="hero-title font-script leading-none drop-shadow-2xl">
-          <span class="block name-groom" data-splitting>Huy Đạt</span>
-          <span class="hero-amp">&amp;</span>
-          <span class="block name-bride" data-splitting>Khánh Linh</span>
-        </h1>
-        <div class="hero-date mt-10 inline-flex items-center gap-4">
-          <span class="line"></span>
-          <span class="tracking-[0.5em] uppercase text-sm md:text-base">18 · 10 · 2026</span>
-          <span class="line"></span>
-        </div>
-
-        <div class="mt-12">
-          <a href="#events" class="btn-glass">
-            <span>Xem thông tin lễ cưới</span>
-            <i class="fa-solid fa-arrow-down ml-3"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-      <span></span>
+  <!-- Invitation page -->
+  <section class="invitation-page">
+    <div class="invitation-paper-shell">
+      <p class="paper-kicker">Wedding Invitation</p>
+      <div class="paper-rule"></div>
+      <p class="paper-intro">Trân trọng kính mời</p>
+      <p class="paper-script">Huy Đạt <span>&amp;</span> Khánh Linh</p>
+      <p class="paper-copy">Đến chung vui trong ngày trọng đại của chúng tôi</p>
+      <a class="paper-scroll" href="#couple"><i class="fa-solid fa-chevron-down"></i></a>
     </div>
   </section>
 
   <!-- COUPLE CARDS -->
-  <section class="py-24 px-6 bg-gradient-to-b from-rose-50/50 to-white">
+  <section id="couple" class="paper-section couple-section py-24 px-6">
     <div class="text-center mb-16">
       <p class="section-eyebrow">The Couple</p>
       <h2 class="section-title">Cô dâu &amp; Chú rể</h2>
@@ -145,13 +108,31 @@
   </section>
 
   <!-- EVENTS -->
-  <section id="events" class="events-section py-24 px-6">
+  <section id="events" class="events-section paper-section py-24 px-6">
     <div class="text-center mb-16">
       <p class="section-eyebrow">Wedding Details</p>
       <h2 class="section-title">Lễ thành hôn</h2>
       <div class="divider-fancy"><i class="fa-solid fa-heart"></i></div>
     </div>
+    <div class="wedding-moments" aria-label="Khoảnh khắc cưới">
+      <div class="moments-grid">
+        <img src="assets/images/display/TTD_7273.jpg" alt="Khoảnh khắc cưới của Huy Đạt và Khánh Linh" loading="lazy" />
+        <img src="assets/images/display/TTD_7298.jpg" alt="Khoảnh khắc cưới của Huy Đạt và Khánh Linh" loading="lazy" />
+        <img src="assets/images/display/TTD_7209.jpg" alt="Khoảnh khắc cưới của Huy Đạt và Khánh Linh" loading="lazy" />
+      </div>
+    </div>
     <div class="wedding-invites max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+      <article class="event-card" data-reveal>
+        <i class="fa-solid fa-utensils event-icon" aria-hidden="true"></i>
+        <p class="event-label">Thân mật</p>
+        <h3>Bữa cơm thân mật</h3>
+        <p class="event-date">Thứ bảy, 17 tháng 10, 2026</p>
+        <p class="event-time"><i class="fa-regular fa-clock"></i> 11:30</p>
+        <p class="event-location"><i class="fa-solid fa-location-dot"></i> Quan Thổ 1, Tôn Đức Thắng, Hà Nội</p>
+        <a class="event-map" href="https://www.google.com/maps/place/Ng.+Quan+Th%E1%BB%95+1,+%C3%94+Ch%E1%BB%A3+D%E1%BB%ABa,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-map-location-dot"></i> Mở Google Maps
+        </a>
+      </article>
       <article class="event-card" data-reveal>
         <i class="fa-solid fa-ring event-icon" aria-hidden="true"></i>
         <p class="event-label">Nghi lễ</p>
@@ -163,25 +144,14 @@
           <i class="fa-solid fa-map-location-dot"></i> Mở Google Maps
         </a>
       </article>
-      <article class="event-card" data-reveal>
-        <i class="fa-solid fa-champagne-glasses event-icon" aria-hidden="true"></i>
-        <p class="event-label">Thân mật</p>
-        <h3>Bữa cơm thân mật</h3>
-        <p class="event-date">Chủ nhật, 17 tháng 10, 2026</p>
-        <p class="event-time"><i class="fa-regular fa-clock"></i> 11:30</p>
-        <p class="event-location"><i class="fa-solid fa-location-dot"></i> Quan Thổ 1, Tôn Đức Thắng, Hà Nội</p>
-        <a class="event-map" href="https://www.google.com/maps/place/Ng.+Quan+Th%E1%BB%95+1,+%C3%94+Ch%E1%BB%A3+D%E1%BB%ABa,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0234156,105.8265998,17z/data=!3m1!4b1!4m6!3m5!1s0x3135ab77fca39cfb:0x877497789dfe3bca!8m2!3d21.0234106!4d105.8291801!16s%2Fg%2F1th1rj9b?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
-          <i class="fa-solid fa-map-location-dot"></i> Mở Google Maps
-        </a>
-      </article>
     </div>
   </section>
 
   <!-- GALLERY -->
-  <section id="gallery" class="py-24 px-4 md:px-10 bg-white relative overflow-hidden">
+  <section id="gallery" class="paper-section album-section py-24 px-4 md:px-10 bg-white relative overflow-hidden">
     <div class="text-center mb-16">
-      <p class="section-eyebrow">Moments</p>
-      <h2 class="section-title">Khoảnh khắc đáng nhớ</h2>
+      <p class="section-eyebrow">Our Wedding Album</p>
+      <h2 class="section-title">Album ảnh cưới</h2>
       <div class="divider-fancy"><i class="fa-solid fa-camera-retro"></i></div>
     </div>
     <div id="masonry" class="masonry max-w-7xl mx-auto"></div>
@@ -202,7 +172,7 @@
   </section>
 
   <!-- COUNTDOWN -->
-  <section class="py-28 px-6 text-center bg-gradient-to-b from-white to-rose-50">
+  <section class="countdown-section py-28 px-6 text-center bg-gradient-to-b from-white to-rose-50">
     <p class="section-eyebrow">Counting Down</p>
     <h2 class="section-title">Đếm ngược ngày trọng đại</h2>
     <div class="divider-fancy"><i class="fa-solid fa-hourglass-half"></i></div>
