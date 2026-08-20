@@ -67,6 +67,10 @@ body {
 .paper-section { background: #fffdf8; }
 .couple-section { border-top: 1px solid rgba(201,169,110,.3); }
 .album-section { border-top: 1px solid rgba(201,169,110,.3); }
+.thank-you-section { padding: clamp(70px, 10vw, 120px) 24px; text-align: center; background: var(--rose-deep); }
+.thank-you-inner { max-width: 860px; margin: 0 auto; }
+.thank-you-vietnamese { margin: 0 auto; color: #fffaf1; font: 500 clamp(1.5rem, 3.5vw, 2.6rem)/1.45 'Cormorant Garamond', serif; }
+.thank-you-english { margin: 26px 0 0; color: #f1cfc4; font: 400 clamp(1.25rem, 2.5vw, 1.8rem)/1.3 'Great Vibes', cursive; }
 .wedding-moments { padding: clamp(18px, 4vw, 42px) 20px; background: var(--paper); border: 1px solid rgba(201,162,103,.35); margin-bottom: 42px; }
 .moments-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(8px, 2vw, 20px); max-width: 980px; margin: 0 auto; }
 .moments-grid img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border: 5px solid var(--cream); box-shadow: 0 10px 22px rgba(80,25,35,.16); }
@@ -276,6 +280,12 @@ h2.section-title { font-family: 'Playfair Display', serif; }
 .timeline-content p { color: #6b5b5e; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
 
 @media (max-width: 768px) {
+  .invitation-card {
+    max-height: calc(100svh - 16px);
+    padding: 16px 18px 22px;
+  }
+  .cover-photo-trigger img { height: min(60svh, 520px); }
+  .cover-hint { margin-top: 10px; font-size: .64rem; letter-spacing: .1em; }
   .cover-title { font-size: clamp(1.15rem, 7vw, 2.2rem); }
   .invitation-gate.is-opening .invitation-envelope {
     transform: translateY(52px) scale(1.3);
@@ -501,7 +511,8 @@ body { color: var(--ink); background: var(--rose-deep); }
 .couple-section > .text-center .section-title,
 .events-section > .text-center .section-title,
 .album-section > .text-center .section-title,
-.countdown-section > .section-title { color: #fffaf1; }
+.countdown-section > .section-title,
+.thank-you-section .section-title { color: #fffaf1; }
 .bg-stone-900 { background-color: var(--rose-deep); }
 footer { color: #fffaf1; }
 ::selection { background: var(--rose-soft); color: var(--rose-deep); }
