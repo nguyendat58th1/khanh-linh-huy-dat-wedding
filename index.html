@@ -70,15 +70,40 @@
     <source src="assets/music/wedding.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- Invitation page -->
-  <section class="invitation-page">
-    <div class="invitation-paper-shell">
-      <p class="paper-kicker">Wedding Invitation</p>
-      <div class="paper-rule"></div>
-      <p class="paper-intro">Trân trọng kính mời</p>
-      <p class="paper-script">Huy Đạt <span>&amp;</span> Khánh Linh</p>
-      <p class="paper-copy">Đến chung vui trong ngày trọng đại của chúng tôi</p>
-      <a class="paper-scroll" href="#couple"><i class="fa-solid fa-chevron-down"></i></a>
+  <!-- HERO with Swiper background slider -->
+  <section class="hero relative h-screen overflow-hidden">
+    <div class="swiper hero-swiper absolute inset-0">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/display/TTD_6724.jpg')"></div></div>
+        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/display/TTD_7273.jpg')"></div></div>
+        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/display/TTD_7298.jpg')"></div></div>
+        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/display/TTD_7382.jpg')"></div></div>
+      </div>
+    </div>
+    <div class="hero-overlay absolute inset-0"></div>
+    <div class="relative z-10 h-full flex items-center justify-center text-center text-white px-6">
+      <div>
+        <p class="hero-pre tracking-[0.7em] uppercase text-xs md:text-sm mb-8 opacity-90" data-splitting>Save the date</p>
+        <h1 class="hero-title font-script leading-none drop-shadow-2xl">
+          <span class="block name-groom" data-splitting>Huy Đạt</span>
+          <span class="hero-amp">&amp;</span>
+          <span class="block name-bride" data-splitting>Khánh Linh</span>
+        </h1>
+        <div class="hero-date mt-10 inline-flex items-center gap-4">
+          <span class="line"></span>
+          <span class="tracking-[0.5em] uppercase text-sm md:text-base">18 · 10 · 2026</span>
+          <span class="line"></span>
+        </div>
+        <div class="mt-12">
+          <a href="#events" class="btn-glass">
+            <span>Xem thông tin lễ cưới</span>
+            <i class="fa-solid fa-arrow-down ml-3"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <span></span>
     </div>
   </section>
 
@@ -91,6 +116,11 @@
     </div>
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
       <div class="couple-card" data-reveal>
+        <div class="family-info">
+          <p class="family-label">Nhà trai</p>
+          <p>Ông Nguyễn Huy Thạch</p>
+          <p>Bà Nguyễn Thị Hải</p>
+        </div>
         <div class="couple-img" style="background-image:url('assets/images/display/TTD_6985.jpg')"></div>
         <div class="couple-info">
           <p class="couple-role">The Groom</p>
@@ -98,6 +128,11 @@
         </div>
       </div>
       <div class="couple-card" data-reveal>
+        <div class="family-info">
+          <p class="family-label">Nhà gái</p>
+          <p>Ông Trần Tuấn Hiệp</p>
+          <p>Bà Trần Thị Kim Tuyết</p>
+        </div>
         <div class="couple-img" style="background-image:url('assets/images/display/TTD_7067.jpg')"></div>
         <div class="couple-info">
           <p class="couple-role">The Bride</p>
@@ -124,7 +159,7 @@
     <div class="wedding-invites max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
       <article class="event-card" data-reveal>
         <i class="fa-solid fa-utensils event-icon" aria-hidden="true"></i>
-        <p class="event-label">Thân mật</p>
+        <p class="event-label">Thân mật (nhà gái)</p>
         <h3>Bữa cơm thân mật</h3>
         <p class="event-date">Thứ bảy, 17 tháng 10, 2026</p>
         <p class="event-time"><i class="fa-regular fa-clock"></i> 11:30</p>
@@ -135,7 +170,7 @@
       </article>
       <article class="event-card" data-reveal>
         <i class="fa-solid fa-ring event-icon" aria-hidden="true"></i>
-        <p class="event-label">Nghi lễ</p>
+        <p class="event-label">Nghi lễ (nhà trai)</p>
         <h3>Lễ thành hôn</h3>
         <p class="event-date">Chủ nhật, 18 tháng 10, 2026</p>
         <p class="event-time"><i class="fa-regular fa-clock"></i> 10:00</p>
@@ -160,7 +195,6 @@
   <!-- QUOTE / PARALLAX -->
   <section class="quote-section py-40 px-6 text-center text-white relative overflow-hidden">
     <div class="quote-bg"></div>
-    <div class="absolute inset-0 bg-black/50"></div>
     <div class="relative z-10 max-w-3xl mx-auto">
       <i class="fa-solid fa-quote-left text-4xl text-rose-200 mb-8 quote-icon"></i>
       <p class="font-script text-4xl md:text-7xl leading-tight reveal-text">
