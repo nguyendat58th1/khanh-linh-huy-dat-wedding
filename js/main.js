@@ -59,11 +59,13 @@ async function renderGallery() {
   images.forEach((img, idx) => {
     const isObject = typeof img === 'object';
     const thumbSrc = isObject ? img.src  : `assets/images/thumbs/${img}`;
+    const previewSrc = isObject ? img.src : `assets/images/display/${img}`;
     const fullSrc  = isObject ? img.full : `assets/images/${img}`;
     const a = document.createElement('a');
-    a.href = fullSrc;
+    a.href = previewSrc;
     a.className = 'masonry-item';
-    a.dataset.src = fullSrc;
+    a.dataset.src = previewSrc;
+    a.dataset.fullSrc = fullSrc;
     a.dataset.subHtml = `<h4>Huy Đạt &amp; Khánh Linh</h4><p>Wedding moment ${idx + 1}</p>`;
     const im = document.createElement('img');
     im.src = thumbSrc; im.alt = `Wedding ${idx + 1}`; im.loading = 'lazy';
@@ -76,6 +78,33 @@ async function renderGallery() {
 function initLightGallery() {
   const el = document.getElementById('masonry');
   if (!el || !window.lightGallery) return;
+  const warmedImages = new Map();
+  const galleryItems = () => [...el.querySelectorAll('.masonry-item')];
+  const warmFullImage = item => {
+    if (!item?.dataset.fullSrc) return Promise.resolve();
+    if (warmedImages.has(item.dataset.fullSrc)) return warmedImages.get(item.dataset.fullSrc);
+    const image = new Image();
+    const promise = new Promise(resolve => {
+      image.onload = resolve;
+      image.onerror = resolve;
+    });
+    image.src = item.dataset.fullSrc;
+    warmedImages.set(item.dataset.fullSrc, promise);
+    return promise;
+  };
+  const upgradeSlide = index => {
+    const item = galleryItems()[index];
+    if (!item) return;
+    warmFullImage(item).then(() => {
+      const slide = document.querySelectorAll('.lg-item')[index];
+      const image = slide?.querySelector('.lg-image');
+      if (image) image.src = item.dataset.fullSrc;
+    });
+  };
+  el.addEventListener('pointerover', event => warmFullImage(event.target.closest('.masonry-item')));
+  el.addEventListener('pointerdown', event => warmFullImage(event.target.closest('.masonry-item')));
+  el.addEventListener('lgAfterOpen', event => upgradeSlide(event.detail.index));
+  el.addEventListener('lgAfterSlide', event => upgradeSlide(event.detail.index));
   lightGallery(el, {
     selector: '.masonry-item',
     plugins: [window.lgZoom, window.lgThumbnail, window.lgFullscreen, window.lgAutoplay].filter(Boolean),
