@@ -29,12 +29,38 @@
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="text-stone-800 overflow-x-hidden">
+<body class="text-stone-800 overflow-x-hidden invitation-locked">
 
-  <!-- tsParticles canvas (floating petals) -->
+  <!-- Invitation gate -->
+  <div id="invitationGate" class="invitation-gate" role="dialog" aria-modal="true" aria-labelledby="invitationTitle">
+    <div class="invitation-card">
+      <div class="invitation-card-inner">
+        <div class="invitation-envelope" aria-hidden="true">
+          <div class="invitation-flap"></div>
+          <div class="invitation-paper">
+            <div class="invitation-photo invitation-photo-left">
+              <img src="assets/images/TTD_7466.jpg" alt="" />
+            </div>
+            <div class="invitation-paper-date">18 · 10 · 2026</div>
+            <div class="invitation-photo invitation-photo-right">
+              <img src="assets/images/TTD_7480.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+        <p class="invitation-kicker">Thiệp mời</p>
+        <p class="invitation-monogram">Đ <span>&amp;</span> L</p>
+        <h1 id="invitationTitle" class="invitation-title">Huy Đạt &amp; Khánh Linh</h1>
+        <p class="invitation-date">18 · 10 · 2026</p>
+        <button id="openInvitation" class="invitation-open" type="button">
+          <i class="fa-solid fa-envelope-open" aria-hidden="true"></i>
+          <span>Mở thiệp cưới</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="tsparticles"></div>
 
-  <!-- Loading screen -->
   <div id="loader">
     <div class="loader-inner">
       <div class="loader-heart"><i class="fa-solid fa-heart"></i></div>
@@ -42,7 +68,6 @@
     </div>
   </div>
 
-  <!-- Music player -->
   <div id="musicToggle" class="music-toggle" title="Bật / tắt nhạc nền">
     <div class="music-ring"></div>
     <i class="fa-solid fa-music"></i>
@@ -55,10 +80,10 @@
   <section class="hero relative h-screen overflow-hidden">
     <div class="swiper hero-swiper absolute inset-0">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80')"></div></div>
-        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1920&q=80')"></div></div>
-        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&q=80')"></div></div>
-        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&q=80')"></div></div>
+        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/TTD_6724.jpg')"></div></div>
+        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/TTD_7273.jpg')"></div></div>
+        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/TTD_7298.jpg')"></div></div>
+        <div class="swiper-slide"><div class="hero-bg" style="background-image:url('assets/images/TTD_7382.jpg')"></div></div>
       </div>
     </div>
     <div class="hero-overlay absolute inset-0"></div>
@@ -78,8 +103,8 @@
         </div>
 
         <div class="mt-12">
-          <a href="#story" class="btn-glass">
-            <span>Explore Our Story</span>
+          <a href="#events" class="btn-glass">
+            <span>Xem thông tin lễ cưới</span>
             <i class="fa-solid fa-arrow-down ml-3"></i>
           </a>
         </div>
@@ -88,51 +113,6 @@
 
     <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
       <span></span>
-    </div>
-  </section>
-
-  <!-- STORY -->
-  <section id="story" class="py-32 px-6 max-w-5xl mx-auto text-center relative">
-    <p class="section-eyebrow">Our Story</p>
-    <h2 class="section-title">Hành trình của chúng tôi</h2>
-    <div class="divider-fancy"><i class="fa-solid fa-heart"></i></div>
-    <p class="font-serif text-lg md:text-2xl leading-relaxed text-stone-600 italic reveal-text">
-        Old with someone who makes me feel young
-        I need a man who loves me like
-        My father loves my mom
-    </p>
-
-    <!-- Timeline -->
-    <div class="timeline mt-20">
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <i class="fa-solid fa-mug-hot timeline-icon"></i>
-          <h3>Lần đầu gặp gỡ</h3>
-          <p class="date">2013</p>
-        </div>
-      </div>
-      <div class="timeline-item right">
-        <div class="timeline-content">
-          <i class="fa-solid fa-heart timeline-icon"></i>
-          <h3>Gặp lại</h3>
-          <p class="date">2024</p>
-        </div>
-      </div>
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <i class="fa-solid fa-ring timeline-icon"></i>
-          <h3>Cầu hôn</h3>
-          <p class="date">2026</p>
-        </div>
-      </div>
-      <div class="timeline-item right">
-        <div class="timeline-content">
-          <i class="fa-solid fa-champagne-glasses timeline-icon"></i>
-          <h3>Lễ cưới</h3>
-          <p class="date">18 · 10 · 2026</p>
-          <p>Chúng mình chính thức về chung một nhà ❤</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -145,19 +125,52 @@
     </div>
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
       <div class="couple-card" data-reveal>
-        <div class="couple-img" style="background-image:url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&q=80')"></div>
+        <div class="couple-img" style="background-image:url('assets/images/TTD_6985.jpg')"></div>
         <div class="couple-info">
           <p class="couple-role">The Groom</p>
           <h3 class="font-script text-5xl text-rose-500">Huy Đạt</h3>
         </div>
       </div>
       <div class="couple-card" data-reveal>
-        <div class="couple-img" style="background-image:url('https://images.unsplash.com/photo-1546035768-987a3e15ee7d?w=900&q=80')"></div>
+        <div class="couple-img" style="background-image:url('assets/images/TTD_7067.jpg')"></div>
         <div class="couple-info">
           <p class="couple-role">The Bride</p>
           <h3 class="font-script text-5xl text-rose-500">Khánh Linh</h3>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events" class="events-section py-24 px-6">
+    <div class="text-center mb-16">
+      <p class="section-eyebrow">Wedding Details</p>
+      <h2 class="section-title">Lễ thành hôn</h2>
+      <div class="divider-fancy"><i class="fa-solid fa-heart"></i></div>
+    </div>
+    <div class="wedding-invites max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+      <article class="event-card" data-reveal>
+        <i class="fa-solid fa-ring event-icon" aria-hidden="true"></i>
+        <p class="event-label">Nghi lễ</p>
+        <h3>Lễ thành hôn</h3>
+        <p class="event-date">Chủ nhật, 18 tháng 10, 2026</p>
+        <p class="event-time"><i class="fa-regular fa-clock"></i> 10:00</p>
+        <p class="event-location"><i class="fa-solid fa-location-dot"></i> Triều Khúc, Thanh Liệt, Hà Nội</p>
+        <a class="event-map" href="https://www.google.com/maps/search/?api=1&amp;query=Trieu+Khuc%2C+Thanh+Liet%2C+Ha+Noi" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-map-location-dot"></i> Mở Google Maps
+        </a>
+      </article>
+      <article class="event-card" data-reveal>
+        <i class="fa-solid fa-champagne-glasses event-icon" aria-hidden="true"></i>
+        <p class="event-label">Thân mật</p>
+        <h3>Bữa cơm thân mật</h3>
+        <p class="event-date">Chủ nhật, 18 tháng 10, 2026</p>
+        <p class="event-time"><i class="fa-regular fa-clock"></i> 11:30</p>
+        <p class="event-location"><i class="fa-solid fa-location-dot"></i> Triều Khúc, Thanh Liệt, Hà Nội</p>
+        <a class="event-map" href="https://www.google.com/maps/search/?api=1&amp;query=Trieu+Khuc%2C+Thanh+Liet%2C+Ha+Noi" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-map-location-dot"></i> Mở Google Maps
+        </a>
+      </article>
     </div>
   </section>
 
@@ -196,48 +209,6 @@
       <div class="count-box"><span id="cd-hours">0</span><small>Giờ</small></div>
       <div class="count-box"><span id="cd-mins">0</span><small>Phút</small></div>
       <div class="count-box"><span id="cd-secs">0</span><small>Giây</small></div>
-    </div>
-  </section>
-
-  <!-- VENUE MAP -->
-  <section id="venue" class="py-28 px-6 bg-white">
-    <div class="text-center mb-14">
-      <p class="section-eyebrow">Location</p>
-      <h2 class="section-title">Địa điểm tổ chức</h2>
-      <div class="divider-fancy"><i class="fa-solid fa-location-dot"></i></div>
-      <p class="font-serif text-lg text-stone-600 max-w-2xl mx-auto mt-4">
-        Triều Khúc, Thanh Liệt, Hà Nội
-      </p>
-    </div>
-    <div class="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl venue-map" data-reveal>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.7136!2d105.8057!3d20.9653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acc4c592c7bb%3A0x5e74e88e3ad3fa3b!2zVHJp4buBdSBLaMO6YywgVGhhbmggTGnhu4d0LCBUaGFuaCBUcsOsLCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s"
-        width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    <div class="text-center mt-10">
-      <a href="https://www.google.com/maps/search/Trieu+Khuc,+Thanh+Liet,+Ha+Noi" target="_blank" class="btn-rose">
-        <i class="fa-solid fa-map-location-dot mr-2"></i>Xem chỉ đường
-      </a>
-    </div>
-  </section>
-
-  <!-- WISHES (Swiper) -->
-  <section class="py-28 px-6 bg-rose-50/40">
-    <div class="text-center mb-14">
-      <p class="section-eyebrow">Wishes</p>
-      <h2 class="section-title">Lời chúc từ bạn bè</h2>
-      <div class="divider-fancy"><i class="fa-solid fa-envelope-open-text"></i></div>
-    </div>
-    <div class="swiper wishes-swiper max-w-5xl mx-auto">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><div class="wish-card"><i class="fa-solid fa-quote-left"></i><p>Chúc hai bạn sống lâu trăm tuổi, cãi nhau cả đời nhưng đừng bao giờ tính chuyện chia tài sản!</p><h4>— Hải Nam</h4></div></div>
-        <div class="swiper-slide"><div class="wish-card"><i class="fa-solid fa-quote-left"></i><p>Đám cưới đẹp quá, chỉ tiếc thằng Đạt không còn cơ hội nào khác để nghĩ lại nữa. Chúc mừng!</p><h4>— Duy Thắng</h4></div></div>
-        <div class="swiper-slide"><div class="wish-card"><i class="fa-solid fa-quote-left"></i><p>Yeu nhau như hai bạn thì mình cũng muốn cưới... giá như có người yêu để cưới đã.</p><h4>— Thái Dương</h4></div></div>
-        <div class="swiper-slide"><div class="wish-card"><i class="fa-solid fa-quote-left"></i><p>Chúc vợ chồng sớm có “dự án nhỏ” — để bố mẹ hai bên có việc mà bận rộn!</p><h4>— Minh Hiếu</h4></div></div>
-        <div class="swiper-slide"><div class="wish-card"><i class="fa-solid fa-quote-left"></i><p>Rồi sẽ tới ngày chúng mình hiểu: tình yêu là cuộc thi xem ai rửa bát nhanh hơn. Chúc may mắn!</p><h4>— Hồng Linh</h4></div></div>
-      </div>
-      <div class="swiper-pagination"></div>
     </div>
   </section>
 

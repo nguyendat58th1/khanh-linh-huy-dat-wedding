@@ -52,9 +52,8 @@ async function renderGallery() {
   const container = document.getElementById('masonry');
   if (!container) return;
 
-  // Lấy danh sách: auto-detect trước, CONFIG sau
-  let images = await autoDetectImages();
-  if (!images || !images.length) images = CONFIG?.galleryImages || [];
+  // Config is the source of truth so the gallery preserves the filename order.
+  const images = CONFIG?.galleryImages || [];
 
   container.innerHTML = '';
   images.forEach((img, idx) => {
@@ -91,9 +90,7 @@ function initLightGallery() {
 let lenis;
 function initLenis() {
   if (!window.Lenis) return;
-  lenis = new Lenis({ duration: 1.2, smoothWheel: true, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-  requestAnimationFrame(raf);
+  lenis = new Lenis({ duration: 0.8, smoothWheel: true, syncTouch: false, easing: t => 1 - Math.pow(1 - t, 3) });
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href');
@@ -103,7 +100,10 @@ function initLenis() {
   if (window.ScrollTrigger) {
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(time => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
+  } else {
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
   }
 }
 
@@ -125,7 +125,7 @@ function initHeroSwiper() {
 
 // ---- Wishes Swiper ----
 function initWishesSwiper() {
-  if (!window.Swiper) return;
+  if (!window.Swiper || !document.querySelector('.wishes-swiper')) return;
   new Swiper('.wishes-swiper', {
     loop: true,
     autoplay: { delay: 4500, disableOnInteraction: false },
@@ -144,22 +144,22 @@ async function initParticles() {
     options: {
       fullScreen: { enable: false },
       background: { color: 'transparent' },
-      fpsLimit: 60,
+      fpsLimit: 24,
       particles: {
-        number: { value: 35, density: { enable: true, area: 900 } },
+        number: { value: 12, density: { enable: true, area: 1200 } },
         shape: {
           type: 'char',
           options: { char: [{ value: ['❤', '✿', '❀'], font: 'Arial', style: '', weight: '400' }] },
         },
         color: { value: ['#e11d48', '#fb7185', '#fda4af', '#fecdd3'] },
         opacity: { value: { min: 0.3, max: 0.8 } },
-        size: { value: { min: 8, max: 18 } },
+        size: { value: { min: 6, max: 12 } },
         move: {
-          enable: true, direction: 'bottom', speed: { min: 0.6, max: 1.6 },
+          enable: true, direction: 'bottom', speed: { min: 0.2, max: 0.6 },
           straight: false, outModes: { default: 'out' },
         },
-        rotate: { value: { min: 0, max: 360 }, animation: { enable: true, speed: 5 } },
-        wobble: { enable: true, distance: 20, speed: { min: -3, max: 3 } },
+        rotate: { value: { min: 0, max: 360 }, animation: { enable: false } },
+        wobble: { enable: false },
       },
       detectRetina: true,
     },
@@ -208,22 +208,8 @@ function initGSAP() {
     });
   });
 
-  // Masonry gallery items
-  setTimeout(() => {
-    gsap.utils.toArray('.masonry-item').forEach((el, i) => {
-      gsap.from(el, {
-        scrollTrigger: { trigger: el, start: 'top 92%' },
-        opacity: 0, y: 60, scale: 0.9, duration: 0.9, delay: (i % 4) * 0.08, ease: 'power3.out',
-      });
-    });
-    ScrollTrigger.refresh();
-  }, 150);
-
-  // Parallax for quote background
-  gsap.to('.quote-section .quote-bg', {
-    yPercent: 25, ease: 'none',
-    scrollTrigger: { trigger: '.quote-section', start: 'top bottom', end: 'bottom top', scrub: true },
-  });
+  // Keep the long gallery and quote section free of per-frame scroll effects.
+  ScrollTrigger.refresh();
 
   // Countdown
   gsap.from('.count-box', {
@@ -247,6 +233,37 @@ function setupMusic() {
     else { audio.play().catch(() => {}); toggle.classList.add('playing'); }
     playing = !playing;
   });
+}
+
+// ---- Invitation gate ----
+function setupInvitationGate() {
+  const gate = document.getElementById('invitationGate');
+  const openButton = document.getElementById('openInvitation');
+  if (!gate || !openButton) return;
+  document.body.classList.add('invitation-locked');
+  document.documentElement.classList.add('invitation-locked');
+  const preventScroll = event => event.preventDefault();
+  const preventKeyScroll = event => {
+    if ([' ', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(event.key)) {
+      event.preventDefault();
+    }
+  };
+  window.addEventListener('wheel', preventScroll, { passive: false });
+  window.addEventListener('touchmove', preventScroll, { passive: false });
+  window.addEventListener('keydown', preventKeyScroll);
+  openButton.addEventListener('click', () => {
+    gate.classList.add('is-opening');
+    openButton.disabled = true;
+    setTimeout(() => {
+      gate.classList.add('is-open');
+      document.body.classList.remove('invitation-locked');
+      document.documentElement.classList.remove('invitation-locked');
+      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('keydown', preventKeyScroll);
+      setTimeout(() => gate.remove(), 850);
+    }, 4400);
+  }, { once: true });
 }
 
 // ---- Countdown ----
@@ -305,6 +322,7 @@ function hideLoader() {
 
 // ---- Init ----
 document.addEventListener('DOMContentLoaded', async () => {
+  setupInvitationGate();
   hideLoader();
   initSplitting();
   initLenis();

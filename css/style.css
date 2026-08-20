@@ -16,11 +16,96 @@
 html { scroll-behavior: smooth; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
+body.invitation-locked { overflow: hidden; }
+html.invitation-locked, html.invitation-locked body { overflow: hidden; height: 100%; }
 
 body {
   font-family: 'Lexend', 'Segoe UI', sans-serif;
   background: linear-gradient(180deg, #fff7f3 0%, #ffeef0 50%, #fff7f3 100%);
 }
+
+/* ---------- Invitation gate ---------- */
+.invitation-gate {
+  position: fixed; inset: 0; z-index: 11000;
+  display: grid; place-items: center; padding: 24px;
+  background: radial-gradient(circle at 50% 20%, rgba(255,255,255,.94), rgba(255,236,235,.96) 48%, rgba(159,18,57,.94));
+  transition: opacity .8s ease, visibility .8s ease;
+}
+.invitation-gate.is-open { opacity: 0; visibility: hidden; pointer-events: none; }
+.invitation-card {
+  width: min(100%, 520px); padding: 0;
+  background: transparent; border: 0; box-shadow: none;
+  transform: translateY(0); animation: invitationRise .9s ease both;
+}
+.invitation-card-inner {
+  padding: 0 24px; text-align: center;
+  border: 0; background: transparent;
+  position: relative; overflow: hidden;
+}
+.invitation-envelope {
+  position: relative; width: min(100%, 420px); height: 205px; margin: 0 auto 28px;
+  perspective: 900px;
+}
+.invitation-paper {
+  position: absolute; inset: 22px 38px 0; z-index: 1;
+  background: #fffdf9; border: 1px solid rgba(201,169,110,.65);
+  box-shadow: 0 8px 18px rgba(79,13,32,.12);
+  transform: translateY(58px); transition: transform .9s cubic-bezier(.2,.75,.25,1);
+}
+.invitation-flap {
+  position: absolute; inset: 0 0 auto; z-index: 4; height: 122px;
+  background: linear-gradient(145deg, #fff1ec, #f7cdd0);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center; transition: transform .85s cubic-bezier(.2,.75,.25,1);
+  filter: drop-shadow(0 4px 5px rgba(79,13,32,.14));
+}
+.invitation-envelope::after {
+  content: ''; position: absolute; inset: 48px 0 0; z-index: 3;
+  background: linear-gradient(135deg, #f6d4d5 50%, #edc0c5 50%);
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+}
+.invitation-photo {
+  position: absolute; top: 10px; width: 100px; height: 126px; padding: 5px;
+  background: #fff; box-shadow: 0 5px 12px rgba(79,13,32,.2);
+  opacity: 0; transition: opacity .45s ease, transform .9s cubic-bezier(.2,.75,.25,1);
+}
+.invitation-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.invitation-photo-left { left: 8px; transform: translateY(72px) rotate(-10deg); }
+.invitation-photo-right { right: 8px; transform: translateY(72px) rotate(10deg); }
+.invitation-paper-date {
+  position: absolute; top: 41px; left: 50%; z-index: 2; width: 100%;
+  color: var(--rose-deep); font: 500 .8rem 'Playfair Display', serif;
+  letter-spacing: .15em; text-align: center; transform: translateX(-50%); opacity: 0;
+  transition: opacity .45s ease .35s;
+}
+.invitation-gate.is-opening .invitation-flap { transform: rotateX(180deg); }
+.invitation-gate.is-opening .invitation-paper { transform: translateY(0); }
+.invitation-gate.is-opening .invitation-photo { opacity: 1; transform: translateY(-70px) rotate(-10deg); transition-delay: .5s; }
+.invitation-gate.is-opening .invitation-photo-right { transform: translateY(-70px) rotate(10deg); }
+.invitation-gate.is-opening .invitation-paper-date { opacity: 1; }
+.invitation-gate.is-opening .invitation-kicker,
+.invitation-gate.is-opening .invitation-monogram,
+.invitation-gate.is-opening .invitation-title,
+.invitation-gate.is-opening > .invitation-card > .invitation-card-inner > .invitation-date,
+.invitation-gate.is-opening .invitation-open { opacity: 0; transition: opacity .3s ease; }
+.invitation-gate.is-opening .invitation-card-inner { padding-top: 24px; }
+.invitation-kicker, .invitation-date {
+  color: var(--rose-deep); font-size: .72rem; letter-spacing: .35em; text-transform: uppercase;
+}
+.invitation-monogram {
+  margin: 24px 0 10px; color: var(--gold); font: 3.5rem/1 'Great Vibes', cursive;
+}
+.invitation-monogram span { color: var(--rose); font-size: .7em; }
+.invitation-title { color: var(--ink); font: 500 clamp(2rem, 7vw, 3.4rem)/1.15 'Playfair Display', serif; }
+.invitation-date { margin-top: 18px; }
+.invitation-open {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; padding: 14px 24px;
+  border: 1px solid var(--rose); color: #fff; background: var(--rose); cursor: pointer;
+  font: 500 .75rem 'Lexend', sans-serif; letter-spacing: .12em; text-transform: uppercase;
+  transition: transform .25s ease, background .25s ease;
+}
+.invitation-open:hover { background: var(--rose-deep); transform: translateY(-3px); }
+@keyframes invitationRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Fonts */
 .font-script { font-family: 'Great Vibes', cursive; font-weight: 400; }
@@ -248,6 +333,25 @@ h2.section-title { font-family: 'Playfair Display', serif; }
   font-size: .7rem; letter-spacing: .4em; text-transform: uppercase;
   color: var(--rose); margin-bottom: 6px;
 }
+
+/* ---------- Wedding event cards ---------- */
+.events-section { background: linear-gradient(180deg, #fff 0%, var(--cream) 100%); }
+.event-card {
+  position: relative; padding: 42px 30px 36px; text-align: center; background: #fff;
+  border: 1px solid rgba(201,169,110,.55); box-shadow: 0 18px 45px rgba(159,18,57,.1);
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+.event-card::before, .event-card::after { content: ''; position: absolute; width: 28px; height: 28px; border-color: var(--gold); }
+.event-card::before { top: 12px; left: 12px; border-top: 1px solid; border-left: 1px solid; }
+.event-card::after { right: 12px; bottom: 12px; border-right: 1px solid; border-bottom: 1px solid; }
+.event-card:hover { transform: translateY(-6px); box-shadow: 0 26px 55px rgba(159,18,57,.16); }
+.event-icon { color: var(--rose); font-size: 1.8rem; }
+.event-label { margin-top: 16px; color: var(--rose); font-size: .7rem; letter-spacing: .35em; text-transform: uppercase; }
+.event-card h3 { margin-top: 8px; color: var(--ink); font: 500 2rem 'Playfair Display', serif; }
+.event-date, .event-time, .event-location { margin-top: 14px; color: #6b5b5e; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; }
+.event-time i, .event-location i { width: 20px; color: var(--rose); }
+.event-map { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; color: var(--rose-deep); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+.event-map:hover { color: var(--rose); }
 .socials a {
   display: inline-flex; align-items: center; justify-content: center;
   width: 38px; height: 38px; margin: 0 4px;
@@ -256,19 +360,19 @@ h2.section-title { font-family: 'Playfair Display', serif; }
 }
 .socials a:hover { background: var(--rose); color: #fff; transform: translateY(-3px); }
 
-/* ---------- Gallery (Masonry) ---------- */
-.masonry { column-count: 1; column-gap: 16px; }
-@media (min-width: 640px)  { .masonry { column-count: 2; } }
-@media (min-width: 1024px) { .masonry { column-count: 3; } }
-@media (min-width: 1536px) { .masonry { column-count: 4; } }
+/* ---------- Gallery (ordered rows) ---------- */
+.masonry { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (min-width: 640px)  { .masonry { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .masonry { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1536px) { .masonry { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 .masonry-item {
-  display: block; break-inside: avoid;
-  margin-bottom: 16px;
+  display: block;
   border-radius: 18px; overflow: hidden;
   position: relative; cursor: pointer;
   box-shadow: 0 10px 30px rgba(159,18,57,.1);
-  transition: transform .5s ease, box-shadow .5s ease;
+  contain: layout paint;
+  transition: box-shadow .35s ease;
 }
 .masonry-item::after {
   content: ''; position: absolute; inset: 0;
@@ -281,10 +385,10 @@ h2.section-title { font-family: 'Playfair Display', serif; }
   color: #fff; font-size: 28px; z-index: 2;
   opacity: 0; transition: all .4s ease;
 }
-.masonry-item:hover { transform: scale(1.02); box-shadow: 0 20px 50px rgba(159,18,57,.25); }
+.masonry-item:hover { box-shadow: 0 20px 50px rgba(159,18,57,.25); }
 .masonry-item:hover::after { opacity: 1; }
 .masonry-item:hover::before { opacity: 1; transform: translate(-50%,-50%) scale(1); }
-.masonry-item img { width: 100%; display: block; transition: transform .8s ease; }
+.masonry-item img { width: 100%; display: block; }
 .masonry-item:hover img { transform: scale(1.08); }
 
 /* ---------- Quote / Parallax ---------- */
