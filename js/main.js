@@ -265,6 +265,7 @@ function setupMusic() {
   }
   let playing = false;
   let fadeFrame;
+  let fadeTimer;
   const fadeInMusic = () => {
     cancelAnimationFrame(fadeFrame);
     const start = performance.now();
@@ -279,16 +280,19 @@ function setupMusic() {
     };
     fadeFrame = requestAnimationFrame(step);
   };
-  playBackgroundMusic = () => {
+  playBackgroundMusic = (fadeDelay = 0) => {
+    clearTimeout(fadeTimer);
+    audio.volume = 0;
     audio.play().then(() => {
       playing = true;
       toggle.classList.add('playing');
-      fadeInMusic();
+      fadeTimer = setTimeout(fadeInMusic, fadeDelay);
     }).catch(() => {});
   };
   toggle.addEventListener('click', () => {
     if (playing) {
       audio.pause();
+      clearTimeout(fadeTimer);
       cancelAnimationFrame(fadeFrame);
       toggle.classList.remove('playing');
       playing = false;
@@ -315,7 +319,7 @@ function setupInvitationGate() {
   window.addEventListener('touchmove', preventScroll, { passive: false });
   window.addEventListener('keydown', preventKeyScroll);
   openButton.addEventListener('click', () => {
-    playBackgroundMusic();
+    playBackgroundMusic(1000);
     gate.classList.add('is-opening');
     openButton.disabled = true;
     gate.classList.add('is-open');
