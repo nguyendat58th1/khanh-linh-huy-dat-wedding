@@ -52,6 +52,7 @@ body {
 .cover-photo-trigger { display: block; width: min(100%, 430px); margin: 0 auto; padding: 0; border: 9px solid #fff8f1; background: #fff8f1; box-shadow: 0 16px 28px rgba(38,12,14,.28); cursor: pointer; transform: none; transition: transform .35s ease, box-shadow .35s ease; }
 .cover-photo-trigger:hover, .cover-photo-trigger:focus-visible { transform: rotate(0) scale(1.025); box-shadow: 0 22px 36px rgba(38,12,14,.36); outline: none; }
 .cover-photo-trigger img { display: block; width: 100%; height: min(68vh, 620px); object-fit: cover; object-position: center center; }
+.guest-invitation { margin: 16px 0 0; color: #fff1e8; font: 400 .95rem 'Cormorant Garamond', serif; letter-spacing: .06em; }
 .cover-hint { margin: 14px 0 0; color: #fff1e8; font: 500 .7rem 'Lexend', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 .invitation-page { padding: 72px 20px; background: linear-gradient(180deg, #fffaf4, #f8e7e1); }
 .invitation-welcome { padding: 26px 20px 14px; text-align: center; background: var(--rose-deep); }

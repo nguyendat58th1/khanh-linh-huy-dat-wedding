@@ -146,6 +146,14 @@ function initLenis() {
 // ---- Splitting ----
 function initSplitting() { if (window.Splitting) Splitting(); }
 
+// Read the guest name from ?guest=... on the invitation URL.
+function initGuestInvitation() {
+  const label = document.getElementById('guestInvitation');
+  if (!label) return;
+  const guestName = new URLSearchParams(window.location.search).get('guest');
+  if (guestName?.trim()) label.textContent = `Trân trọng kính mời: ${guestName.trim()}`;
+}
+
 // ---- Hero Swiper ----
 function initHeroSwiper() {
   if (!window.Swiper) return;
@@ -389,6 +397,7 @@ function hideLoader() {
 // ---- Init ----
 document.addEventListener('DOMContentLoaded', async () => {
   setupInvitationGate();
+  initGuestInvitation();
   hideLoader();
   initSplitting();
   initLenis();
