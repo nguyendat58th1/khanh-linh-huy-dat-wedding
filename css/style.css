@@ -292,6 +292,11 @@ h2.section-title { font-family: 'Playfair Display', serif; }
     width: 100vw; height: 100svh; max-height: none;
     padding: 16px 18px 22px;
   }
+  .cover-photo-trigger { width: min(100%, 330px); }
+  .cover-photo-trigger img { max-width: 100%; }
+  @media (max-height: 760px) {
+    .cover-photo-trigger { width: min(100%, 290px); }
+  }
   .cover-hint { margin-top: 10px; font-size: .64rem; letter-spacing: .1em; }
   .cover-title { font-size: clamp(1.15rem, 7vw, 2.2rem); }
   .invitation-gate.is-opening .invitation-envelope {
