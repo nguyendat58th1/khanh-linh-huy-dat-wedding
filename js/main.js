@@ -148,10 +148,25 @@ function initSplitting() { if (window.Splitting) Splitting(); }
 
 // Read the guest name from ?guest=... on the invitation URL.
 function initGuestInvitation() {
-  const label = document.getElementById('guestInvitation');
-  if (!label) return;
-  const guestName = new URLSearchParams(window.location.search).get('guest');
-  if (guestName?.trim()) label.textContent = `Trân trọng kính mời: ${guestName.trim()}`;
+  const guestLabel = document.getElementById('guestName');
+  if (!guestLabel) return;
+  const encodedGuestName = new URLSearchParams(window.location.search).get('guest');
+  if (!encodedGuestName?.trim()) return;
+
+  let guestName = encodedGuestName;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const sanitizedName = guestName.replace(/%(?![0-9a-f]{2})/gi, ' ');
+    try {
+      const decodedName = decodeURIComponent(sanitizedName);
+      if (decodedName === guestName) break;
+      guestName = decodedName;
+    } catch (_) {
+      guestName = sanitizedName;
+      break;
+    }
+  }
+  guestName = guestName.replace(/\s+/g, ' ').trim();
+  if (guestName) guestLabel.textContent = guestName;
 }
 
 // ---- Hero Swiper ----
