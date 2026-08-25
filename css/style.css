@@ -37,7 +37,7 @@ body {
 .invitation-card {
   width: 100vw; height: 100dvh; max-height: none; padding: clamp(18px, 4vh, 42px) clamp(18px, 5vw, 42px);
   background: #7f2227; border: 1px solid rgba(255,255,255,.22); box-shadow: 0 24px 70px rgba(47,18,22,.28);
-  box-sizing: border-box; overflow: hidden;
+  box-sizing: border-box; overflow-x: hidden; overflow-y: auto;
   transform: translateY(0); animation: invitationRise .9s ease both;
 }
 .invitation-card-inner {
@@ -49,9 +49,15 @@ body {
 .cover-title { margin: 0 auto 22px; color: #fff9f4; font: 500 clamp(1.45rem, 4vw, 2.7rem)/1.05 'Great Vibes', cursive; white-space: nowrap; }
 .cover-title span { color: #f0c9ba; font-family: 'Playfair Display', serif; font-size: .65em; font-style: italic; }
 .double-happiness { position: absolute; top: -18px; right: -2px; color: #df3138; font: 400 clamp(2.35rem, 6vw, 4rem)/.8 'Times New Roman', serif; text-shadow: 0 2px 0 rgba(255,224,195,.35); }
-.cover-photo-trigger { display: block; width: min(100%, 430px); margin: 0 auto; padding: 0; border: 9px solid #fff8f1; background: #fff8f1; box-shadow: 0 16px 28px rgba(38,12,14,.28); cursor: pointer; transform: none; transition: transform .35s ease, box-shadow .35s ease; }
+.cover-photo-trigger { display: block; width: min(100%, 430px); aspect-ratio: 1521 / 2400; margin: 0 auto; padding: 0; border: 0; box-sizing: border-box; background: #7f2227; box-shadow: 0 16px 28px rgba(38,12,14,.28); cursor: pointer; overflow: hidden; transform: none; transition: transform .35s ease, box-shadow .35s ease; }
 .cover-photo-trigger:hover, .cover-photo-trigger:focus-visible { transform: rotate(0) scale(1.025); box-shadow: 0 22px 36px rgba(38,12,14,.36); outline: none; }
-.cover-photo-trigger img { display: block; width: 100%; height: min(68vh, 620px); object-fit: cover; object-position: center center; }
+.cover-photo-trigger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  object-fit: contain;
+}
 .guest-invitation { margin: 16px 0 0; color: #fff1e8; font: 400 1.9rem 'Cormorant Garamond', serif; letter-spacing: .06em; }
 .guest-name { font: 500 1.15em/1 'Great Vibes', cursive; letter-spacing: .02em; }
 .cover-hint { margin: 14px 0 0; color: #fff1e8; font: 500 .7rem 'Lexend', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
@@ -285,12 +291,6 @@ h2.section-title { font-family: 'Playfair Display', serif; }
   .invitation-card {
     width: 100vw; height: 100svh; max-height: none;
     padding: 16px 18px 22px;
-  }
-  .cover-photo-trigger img {
-    width: 100%;
-    height: auto;
-    max-height: calc(100svh - 250px);
-    object-fit: contain;
   }
   .cover-hint { margin-top: 10px; font-size: .64rem; letter-spacing: .1em; }
   .cover-title { font-size: clamp(1.15rem, 7vw, 2.2rem); }
