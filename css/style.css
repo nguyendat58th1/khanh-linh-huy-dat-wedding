@@ -41,12 +41,13 @@ body {
   transform: translateY(0); animation: invitationRise .9s ease both;
 }
 .invitation-card-inner {
-  padding: 0; text-align: center; position: relative;
+  min-height: 100%; padding: 0; text-align: center; position: relative;
+  display: flex; flex-direction: column; justify-content: center;
 }
-.cover-header { position: relative; display: flex; align-items: flex-start; justify-content: flex-start; gap: 16px; }
+.cover-header { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: flex-start; justify-content: flex-start; gap: 16px; }
 .cover-kicker { margin: 0; color: #fff9f4; text-align: left; font: 500 clamp(.8rem, 2.3vw, 1.4rem)/.95 'Great Vibes', cursive; }
 .cover-date { margin: 2px 0 0; color: #fff1e8; text-align: left; font: 500 .7rem 'Playfair Display', serif; letter-spacing: .22em; transform: translateY(-8px); }
-.cover-title { margin: 0 auto 22px; color: #fff9f4; font: 500 clamp(1.45rem, 4vw, 2.7rem)/1.05 'Great Vibes', cursive; white-space: nowrap; }
+.cover-title { margin: 70px auto 22px; color: #fff9f4; font: 500 clamp(1.45rem, 4vw, 2.7rem)/1.05 'Great Vibes', cursive; white-space: nowrap; }
 .cover-title span { color: #f0c9ba; font-family: 'Playfair Display', serif; font-size: .65em; font-style: italic; }
 .double-happiness { position: absolute; top: -18px; right: -2px; color: #df3138; font: 400 clamp(2.35rem, 6vw, 4rem)/.8 'Times New Roman', serif; text-shadow: 0 2px 0 rgba(255,224,195,.35); }
 .cover-photo-trigger { display: block; width: min(100%, 430px); aspect-ratio: 1521 / 2400; margin: 0 auto; padding: 0; border: 0; box-sizing: border-box; background: #7f2227; box-shadow: 0 16px 28px rgba(38,12,14,.28); cursor: pointer; overflow: hidden; transform: none; transition: transform .35s ease, box-shadow .35s ease; }
