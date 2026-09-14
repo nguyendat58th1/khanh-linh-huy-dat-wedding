@@ -59,8 +59,13 @@ body {
   margin: 0 auto;
   object-fit: contain;
 }
-.guest-invitation { margin: 16px 0 0; color: #fff1e8; font: 400 1.9rem 'Cormorant Garamond', serif; letter-spacing: .06em; }
-.guest-name { font: 500 1.15em/1 'Great Vibes', cursive; letter-spacing: .02em; }
+.guest-invitation { margin: 16px 0 0; color: #fff1e8; font: 400 1.9rem 'Cormorant Garamond', serif; letter-spacing: .06em; display: block; }
+.guest-name {
+  margin: 0;
+  color: #fff1e8;
+  font: 500 clamp(2.2rem, 6vw, 4rem)/1.1 'Great Vibes', cursive;
+  letter-spacing: .02em;
+}
 .cover-hint { margin: 14px 0 0; color: #fff1e8; font: 500 .7rem 'Lexend', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 .invitation-page { padding: 72px 20px; background: linear-gradient(180deg, #fffaf4, #f8e7e1); }
 .invitation-welcome { padding: 26px 20px 14px; text-align: center; background: var(--rose-deep); }
